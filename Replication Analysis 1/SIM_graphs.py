@@ -119,7 +119,11 @@ for i in range(n//2, n):
     
     data_pop[i] = pd.Series([1]*pop_size)
     noise = np.random.normal(size = pop_size)
-    data_pop[i] = data_pop.loc[:,range(n//2)] @ alpha[:-1] + (data_pop.loc[:,i] * alpha[-1]) + (beta * noise)
+    #data_pop[i] = data_pop.loc[:,range(n//2)] @ alpha[:-1] + (data_pop.loc[:,i] * alpha[-1]) + (beta * noise)
+    
+    data_pop.loc[:,i] = (data_pop.loc[:,i] * alpha[-1]) + (beta * noise)
+    for j in range(n//2):
+        data_pop.loc[:,i] += (data_pop.loc[:,j] * alpha[j])
     
 dataset = data_pop.copy() ## dataset.shape() = s x n
 deg_pop_orig = compute_deg(dataset)
