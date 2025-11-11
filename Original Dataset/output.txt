@@ -1,0 +1,58 @@
+[1] "Extracting Protein-Coding Genes"
+[1] "Covariate Analysis"
+Whole_Blood 	 14582 	 670 
+[1] "Extracting Protein-Coding Genes"
+[1] "Covariate Analysis"
+Muscle_Skeletal 	 15163 	 706 
+[1] "Extracting Protein-Coding Genes"
+[1] "Covariate Analysis"
+Lung 	 16765 	 515 
+[1] "Extracting Protein-Coding Genes"
+[1] "Covariate Analysis"
+Skin_Sun_Exposed_Lower_leg 	 16646 	 605 
+[1] "Extracting Protein-Coding Genes"
+[1] "Covariate Analysis"
+Thyroid 	 16607 	 574 
+[1] "Extracting Protein-Coding Genes"
+[1] "Covariate Analysis"
+Pancreas 	 15848 	 305 
+[1] "Extracting Protein-Coding Genes"
+[1] "Covariate Analysis"
+Brain_Cortex 	 16536 	 205 
+[1] "Extracting Protein-Coding Genes"
+[1] "Covariate Analysis"
+Pituitary 	 17036 	 237 
+[1] "Extracting Protein-Coding Genes"
+[1] "Covariate Analysis"
+Brain_Cerebellum 	 16463 	 209 
+[1] "Extracting Protein-Coding Genes"
+[1] "Covariate Analysis"
+Stomach 	 16485 	 324 
+[1] "Extracting Protein-Coding Genes"
+[1] "Covariate Analysis"
+Brain_Caudate_basal_ganglia 	 16474 	 194 
+[1] "Extracting Protein-Coding Genes"
+[1] "Covariate Analysis"
+Kidney_Cortex 	 16450 	 73 
+[1] "Extracting Protein-Coding Genes"
+[1] "Covariate Analysis"
+Brain_Substantia_nigra 	 16413 	 114 
+[1] "Extracting Protein-Coding Genes"
+[1] "Covariate Analysis"
+Uterus 	 16407 	 129 
+[1] "Extracting Protein-Coding Genes"
+[1] "Covariate Analysis"
+Vagina 	 16683 	 141 
+[1] "Extracting Protein-Coding Genes"
+[1] "Covariate Analysis"
+Brain_Amygdala 	 16414 	 129 
+For 73 samples
+For 237 samples
+For 73 samples
+For 237 samples
+For 73 samples
+For 237 samples
+For 73 samples
+For 237 samples
+For 73 samples
+For 237 samples
