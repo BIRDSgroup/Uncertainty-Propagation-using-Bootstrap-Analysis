@@ -1,0 +1,4 @@
+To compile a python file and generate its byte code:
+
+import py_compile
+py_compile.compile('<fname>.py', cfile='<fname>.pyc')
