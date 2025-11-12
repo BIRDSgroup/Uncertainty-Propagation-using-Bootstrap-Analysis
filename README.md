@@ -2,7 +2,7 @@
 
 This repository contains scripts for implementation of the systematic workflow to generate uncertainty-aware gene rankings for downstream network (degree and PageRank centrality) measures, and their analyses.
 
-
+[TOC]
 
 ## Overview of the Project
 
@@ -201,7 +201,7 @@ All of modifications, if required, can be performed as in the scripts for the re
 
 ## License
 
-This project is licensed under the Creative Commons License — see [Link to License file] for details.
+This project is licensed under the Creative Commons License — see [License file](LICENSE)  for details.
 
 ## Citation, Contact
 
