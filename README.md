@@ -2,8 +2,6 @@
 
 This repository contains scripts for implementation of the systematic workflow to generate uncertainty-aware gene rankings for downstream network (degree and PageRank centrality) measures, and their analyses.
 
-[TOC]
-
 ## Overview of the Project
 
 This project develops a systematic workflow that estimates and propagates uncertainty about the coexpression network to degree and PageRank centrality and produces robust (uncertainty-aware) gene rankings. 
@@ -23,7 +21,8 @@ Note: Some of the codes have been designed to run parallelly on a server with $5
 
 Each folder contains the scripts and results for the same analyses. The codes have been implemented such that the functions will read the files from the corresponding directory structure directly, so that manual duplication of the output files will not be necessary. Hence, we suggest to maintain the same directory structure to run the codes without any hassle. 
 
-The overall directory structure is given below: Modify to put it in a collapsible way.
+<details>
+<summary> Click here to view the overall directory structure. </summary>
 
 ```python
 +---Bias	# Scripts to estimate the Estimator and Bootstrap Bias
@@ -129,6 +128,7 @@ The overall directory structure is given below: Modify to put it in a collapsibl
 	+---Pathway Results # scripts to generate the heatmaps and boxplots.
 	'''
 ```
+</details>
 
 ## Input Files and Executing the Pipelines
 
