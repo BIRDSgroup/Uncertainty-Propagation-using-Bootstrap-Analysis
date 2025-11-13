@@ -15,7 +15,7 @@ centrality = 'pagerank'
 
 [os.makedirs('rank plots/' + centrality + '/' + tissue) for tissue in Tissues]
 [os.makedirs('value plots/' + centrality + '/' + tissue) for tissue in Tissues]
-#[os.makedirs('ranks/' + centrality + '/' + tissue) for tissue in Tissues]
+[os.makedirs('ranks/' + centrality + '/' + tissue) for tissue in Tissues]
 
 names = ['deg', 'mu', 'mu-2sigma', 'mu-sigma']
 
@@ -85,8 +85,7 @@ for tissue in Tissues:
         plt.title(names[1] + ' v/s '+ names[i] + '\n' + tissue)
         plt.savefig('value plots/' + centrality + '/' + tissue + '/mu vs ' + names[i] + '.pdf')
         plt.close()
-    
-    '''
+        
     folder = tissue
     if '_' in tissue and tissue.split(sep='_')[-1].isdigit():
         folder = "_".join(tissue.split(sep='_')[:-1])
@@ -94,5 +93,6 @@ for tissue in Tissues:
     output = pd.concat([genes['gene_name'], deg, mu, mu_2sigma, mu_sigma], axis = 1)
     output.columns = ['genes'] + names
     for p in names:
-        (output.loc[:, ['genes', p]]).to_csv('ranks/' + centrality + '/' + tissue + '/' + tissue + '_' + p + '.rnk', sep = '\t', header = False, index=False)
-    '''
+        opfile = 'ranks/' + centrality + '/' + tissue + '/' + tissue + '_' + p + '.rnk'
+        (output.loc[:, ['genes', p]]).to_csv(opfile, sep = '\t', header = False, index=False)
+    
