@@ -186,7 +186,7 @@ To perform the procedure is similar as on the GTEx datasets, however, here, the 
 3. Following this, the *centralities may be similarly computed* as mentioned above from `Replication Analysis on RW Datasets/Centrality Computation`.
 4. To *plot the results* (or to generate the POG values), please run `Replication Analysis on RW Datasets/Results/results.py` (or `pog_vals.py`) using the same procedure as in validation analysis.
 
-##  Simulated Dataset
+###  Analyses on Simulated Dataset
 
 For simulated datasets, the codes for each analysis is independent of each other. Each analysis generates the population dataset, and performs the analysis as required. Nevertheless, if the seed is the same, the same population and respective observed datasets will be generated irrespective of the script/analysis. Please ensure the current working directory is `Simulations and Validation Analysis`.
 
@@ -198,6 +198,69 @@ For simulated datasets, the codes for each analysis is independent of each other
 The input number of genes, the number of bootstrap samples, sample sizes of the observed dataset and the x-axis limit of the CAT and recall plots can be modified with `n, B, SampleSizes` and `klim` variables respectively. In the scripts for replication analysis, set the value of `s` to modify the size of the discovery dataset.
 
 All of modifications, if required, can be performed as in the scripts for the real-world datasets.
+
+### Specificity Analysis
+
+#### Generating the rank files
+
+To generate the rank files, run `Parameter Analysis/code 1.py`. By default, the script will generate the rank files for `pagerank` centrality measures by all the metrics for all the available tissues. The output `.rnk` files will be stored in `Parameter Analysis\ranks`. 
+
+-  *If you want to change the list of tissues*, the please update the `Tissues` variable accordingly.
+-  *If you want to generate the rank files for a different centrality measure*, then please update the `centrality` variable accordingly.
+-  *If you want to change the name of the output rank files*, then please update the `names` variable accordingly.
+-  *If you want to generate the rank files only for a subset of the metrics*, then please update the `parameters` and `ranks` variables in lines $34$ and $41$ respectively. 
+-  *If your centrality files are in a different location*, then please update lines $25,26$ and $92$ to read the `.csv` files with `read_csv()` from `pandas`.
+-  *If you want to change the location of output files*, then please comment line $18$ that creates the destination folder, and update the `opfile` variable in line $96$.
+
+#### GSEA Analysis
+
+Please use scripts in `Tissue Specificity Analysis - 0.05 FDR` (and `Tissue Specificity Analysis - 0.05 FDR`) for specificity analysis with $5$% (and $10$%) cutoff respectively.  `Elevated Genes` contains the list of specific genes (*Total Elevated* category) downloaded from the Human Protein Atlas.
+
+**I.** Run `2.1_gmt_code.py` to generate the customized gene set file. 
+
+-  In the `main` block, set the variable `Tissues` with the list of tissues, whose specific genes you want to add in the gene set  file. Please add the list of tissues as a comma-separated list.
+-  The variable `gtype` stores the type of elevated expression category (see [here](https://www.proteinatlas.org/humanproteome/tissue/tissue+specific) for different categories).
+
+The program generates a customized gene set file `<gtype>.gmt` (in our case `Elevated.gmt`) in the same folder. 
+
+To change the destination location and/or name of the output file, please update line $12$ (`output = gtype + '.gmt'` in  `fun()` function definition).
+
+**II.** To perform the GSEA analysis, please ensure the `WebGestaltR` package in already installed. 
+The R script `2.2_pathways.R` contains the full script to perform the GSEA analysis. 
+The program has been written to run GSEA on measures for both the centralities by all the proposed metrics on all the tissues that have been used. The script invokes the rank files from `Parameter Analysis/ranks`, and performs the analysis. 
+The script will create the directory structure and store the results of the analysis in the `Pathway Analysis` folder. See the overall repository structure for details on the same.
+
+However, to run the script for different input values, please do the following:
+
+-  *If you want to change the list of tissues*, please update the `Tissues` variable in line $16$.
+-  *If you want to run the analysis only for a subset of metrics*, please update the `Parameters` variable in line $17$.
+-  By default the code uses $4$ *cores* to perform the analysis. If you want to change the same, please update `cores` variable in line $18$.
+-  Please set the `centrality` and `gtype` variables with the *type/s of centrality measures and the elevated expression category*, as per your requirement, respectively, before invoking the `pathwayAnalysis()` function in line $31$.
+-  *If your rank files are in a different location*, please update the `ipfile` variable in line $7$ inside the `pathwayAnalysis()` with the source location of your file.
+-  *If you want to change your output location*, please update the `opfile` variable in line $8$ inside the `pathwayAnalysis()` with the destination location.
+-  *To modify the name and location of your customized gene set database*, please update the `dbfile` variable in line $9$ inside the `pathwayAnalysis()` accordingly.
+
+**III.** Scripts to plot the heatmaps and boxplots are inside `Pathway Results` folder. Please run `heatmaps.py` or `boxplots.py` to generate the heatmaps or plot the boxplots respectively. 
+
+`Heatmaps.py`:
+
+-  *To plot for a different list of tissues*, please update `Tissues` variable in line $47$.
+-  *To change the gene sets*, please update `Paths` variable in line $48$.
+-  *To change the category of elevated expression*, please update the list of values for the `gtype` variable in line $50$
+-  *To change the type of centrality*, please update the list of values for the `centrality` variable in line $52$.
+-  *To change the names of the metrics*, please update the `names` variable in line $13$.
+-  *To run on a subset of the metrics*, please update the `parameters` variable in line $17$.
+-  *To change the location of your input files*, please update the `filepath` variable in line $23$.
+-  *To change the destination location of your output heatmaps*, please update the location in `savefig()` function by `matplotlib.pyplot` in line $43$.
+
+`boxplots.py`: Please use this script similarly as above. 
+
+-  The block for Degree (PageRank) centrality from lines $64$ ($70$) onwards generates the box plots for degree (PageRank) centrality measures.
+-  The first parameter of the functions is the name of the specific gene set and the second parameter is the list of tissues for which you want to plot the boxplot.
+-  To generate the plots for a subset of the metrics, please update `parameter_names, file_names` and `parameters` variables in lines $13, 14$ and $40$ respectively.
+-  If your centrality files are in a different location, then please update lines $31$ and $32$ to read the `.csv` files with `read_csv()` from `pandas`.
+-  To change the destination location of your output boxplots, please update the location in `savefig()` function by `matplotlib.pyplot` in line $60$.
+
 
 ## License
 
