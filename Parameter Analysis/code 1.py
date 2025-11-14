@@ -10,14 +10,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import os
 
-Tissues = ['Brain_Amygdala', 'Brain_Caudate_basal_ganglia', 'Brain_Cerebellum', 'Brain_Cortex', 'Brain_Substantia_nigra', 'Kidney_Cortex', 'Lung', 'Muscle_Skeletal', 'Pancreas', 'Pituitary', 'Skin_Sun_Exposed_Lower_leg', 'Stomach', 'Thyroid', 'Uterus', 'Vagina', 'Whole_Blood', 'Muscle_Skeletal_73', 'Muscle_Skeletal_237', 'Whole_Blood_73', 'Whole_Blood_237', 'Lung_237', 'Lung_73']
+Tissues = ['Brain_Amygdala', 'Brain_Caudate_basal_ganglia', 'Brain_Cerebellum', 'Brain_Cortex', 'Brain_Substantia_nigra', 'Kidney_Cortex', 'Lung', 'Muscle_Skeletal', 'Pancreas', 'Pituitary', 'Skin_Sun_Exposed_Lower_leg', 'Stomach', 'Thyroid', 'Uterus', 'Vagina', 'Whole_Blood', 'Muscle_Skeletal_73', 'Muscle_Skeletal_237', 'Whole_Blood_73', 'Whole_Blood_237', 'Skin_Sun_Exposed_Lower_leg_237', 'Skin_Sun_Exposed_Lower_leg_73', 'Thyroid_237', 'Thyroid_73', 'Lung_237', 'Lung_73']
 centrality = 'pagerank'
 
 [os.makedirs('rank plots/' + centrality + '/' + tissue) for tissue in Tissues]
 [os.makedirs('value plots/' + centrality + '/' + tissue) for tissue in Tissues]
 [os.makedirs('ranks/' + centrality + '/' + tissue) for tissue in Tissues]
 
-names = ['deg', 'mu', 'mu-2sigma', 'mu-sigma']
+names = ['obs', 'mu', 'mu-2sigma', 'mu-sigma']
 
 # %% mu v/s mu-sigma v/s mu-2sigma
 for tissue in Tissues:
@@ -95,4 +95,3 @@ for tissue in Tissues:
     for p in names:
         opfile = 'ranks/' + centrality + '/' + tissue + '/' + tissue + '_' + p + '.rnk'
         (output.loc[:, ['genes', p]]).to_csv(opfile, sep = '\t', header = False, index=False)
-    

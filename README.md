@@ -17,12 +17,77 @@ The project is implemented using the following programming languages:
 
 Note: Some of the codes have been designed to run parallelly on a server with $50$ cores, however this is only done in the BASH scripts and can be easily modified to run sequentially on a local system.
 
+### Getting Started
+
+This section will help you set up the project for the first time — from cloning the repository to running a complete example. 
+Follow each step in order.
+
+1. **Clone/download the project from GitHub to your local machine.**
+
+   ```bash
+   git clone https://github.com/yourusername/yourproject.git
+   cd yourproject
+   ```
+
+2. **Prepare input data.** 
+
+   1. Create a new folder with the name of your tissue (e.g., `Tissue`) in `Original Dataset/Preprocessed Files`.
+   2. Place your preprocessed gene expression data in `Original Dataset/Preprocessed Files/Tissue`.
+      The required format is:
+      -  Rows = genes with the first column containing the gene id’s
+      -  Columns = samples with the first row containing the sample id’s
+      -  Values = preprocessed gene expression values
+      -  File name = `Tissue.csv`
+   3. Place your genes file `genes.csv` containing the details of the genes in the same order as in `Tissue.csv` in the same location i.e., `Original Dataset/Preprocessed Files/Tissue/genes.csv`. 
+      If you don’t have information on the genes, then please copy the gene id’s from the 1^st^ column of `Tissue.csv` into `genes.csv`.
+
+3. **Bootstrapping and Computing the centrality measures for all the coexpression networks.**
+
+   1. Use any text editor to open `Centrality Computation/run.sh`
+
+   2. Modify the `tissues` variable with your tissue name.
+      For example, if you are doing this step for the tissues `Tissue1` and `Tissue_2`, then modify the `tissues` variable as: `tissues=("Tissue1" "Tissue_2")`.
+
+   3. Update `B` with the number of bootstrapped coexpression networks you want to compute.
+      For example, if you want to compute $10$ bootstrapped coexpression networks, then modify the variable `B` as: `B=10`
+
+   4. Run the file from terminal as:
+
+      ```bash
+      cd Centrality\ Computation
+      ./run.sh
+      ```
+
+   5. The program runs on $50$ cores, however, if you want to reduce the number of cores, then use any text editor to open `Centrality Computation/main.sh` and update the `cores` variable with the number of cores you want to use.
+
+      -  **Important Note:** Please ensure the number of cores (`cores`) you are using is a factor of the number of bootstrapped coexpression networks (`B`) you are computing.
+
+4. **Computation of the metric values.**
+
+   1. Use any text editor to open `Parameter Analysis/code 3.py`
+
+   2. Modify the `tissues` variable with your tissue name.
+      For example, if you are doing this step for the tissues `Tissue1` and `Tissue_2`, then modify the `tissues` variable as: `tissues = ["Tissue1", "Tissue_2"]`.
+
+   3. Modify the `centrality` variable with the centrality for which you want to compute the metric values.
+      For example, if you are want to compute the values by the metrics for `degree` centrality, then set `centrality = 'degree'`.
+
+      -  **Important Note:** In the current version, only `degree` or `pagerank` are the allowed options.
+
+   4. You can either run the file using your own python environments/compilers, or from the terminal as:
+
+      ```bash
+      cd ..\Parameter\ Analysis
+      python "code 3.py"
+      ```
+
+   5. The program will create `Parameter Analysis/metric values`, and  all your output files will be stored in the folder.
+
 ### Repository Structure
 
 Each folder contains the scripts and results for the same analyses. The codes have been implemented such that the functions will read the files from the corresponding directory structure directly, so that manual duplication of the output files will not be necessary. Hence, we suggest to maintain the same directory structure to run the codes without any hassle. 
 
-<details>
-<summary> Click here to view the overall directory structure. </summary>
+Click here to view the overall directory structure
 
 ```python
 +---Bias	# Scripts to estimate the Estimator and Bootstrap Bias
@@ -62,8 +127,9 @@ Each folder contains the scripts and results for the same analyses. The codes ha
 +---Parameter Analysis
 	'''
 	For every tissue T and for both the centrality measures, it contains scripts to generate:
-	1. the ranks for each metric in T.
-	2. the Spearman correlation among all genes for T.
+	1. values by all the four metrics in T.
+	2. the ranks for each metric in T.
+	3. the Spearman correlation among all genes for T.
 	'''
     
 +---Replication Analysis on RW Datasets
@@ -128,9 +194,8 @@ Each folder contains the scripts and results for the same analyses. The codes ha
 	+---Pathway Results # scripts to generate the heatmaps and boxplots.
 	'''
 ```
-</details>
 
-## Input Files and Executing the Pipelines
+## Executing the Pipelines
 
 ### Generating the centrality measures
 
@@ -260,7 +325,6 @@ However, to run the script for different input values, please do the following:
 -  To generate the plots for a subset of the metrics, please update `parameter_names, file_names` and `parameters` variables in lines $13, 14$ and $40$ respectively.
 -  If your centrality files are in a different location, then please update lines $31$ and $32$ to read the `.csv` files with `read_csv()` from `pandas`.
 -  To change the destination location of your output boxplots, please update the location in `savefig()` function by `matplotlib.pyplot` in line $60$.
-
 
 ## License
 

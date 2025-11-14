@@ -52,8 +52,8 @@ def Bootstrapping(data_sample):
             print(b)
         bootstrap_sample = data_sample.loc[random.choices(data_sample.index, k = s),:]
         deg_b[b,:] = compute_deg(bootstrap_sample)
-    deg_bootstrap = np.mean(deg_b, axis = 0)
-    std_bootstrap = np.std(deg_b, axis = 0)
+    deg_bootstrap = deg_b.mean(axis=0)    
+    std_bootstrap = deg_b.std(axis = 0)
     return deg_bootstrap, std_bootstrap
 
 # %% Seed
