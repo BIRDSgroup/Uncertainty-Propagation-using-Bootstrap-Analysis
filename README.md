@@ -87,7 +87,8 @@ Follow each step in order.
 
 Each folder contains the scripts and results for the same analyses. The codes have been implemented such that the functions will read the files from the corresponding directory structure directly, so that manual duplication of the output files will not be necessary. Hence, we suggest to maintain the same directory structure to run the codes without any hassle. 
 
-Click here to view the overall directory structure
+<details>
+<summary> Click here to view the overall directory structure. </summary>
 
 ```python
 +---Bias	# Scripts to estimate the Estimator and Bootstrap Bias
@@ -194,6 +195,7 @@ Click here to view the overall directory structure
 	+---Pathway Results # scripts to generate the heatmaps and boxplots.
 	'''
 ```
+</details>
 
 ## Executing the Pipelines
 
